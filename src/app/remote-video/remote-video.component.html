@@ -1,0 +1,23 @@
+<!-- src/app/components/remote-videos/remote-videos.component.html -->
+<!-- <div *ngFor="let track of remoteVideoTracks">
+  <video
+    class="video-box"
+    [id]="'remoteVideo-' + track.getParticipantId()"
+    autoplay
+  ></video>
+</div> -->
+
+<!-- <div *ngFor="let track of remoteAudioTracks" >
+    <video class="video-box" [id]="'remoteAudio-' + track.getParticipantId()" autoplay></video>
+  </div> -->
+
+<div id="videoPanel">
+  <div class="flex-container">
+    <!-- <div id="localVideoContainer" class="flex-child">
+
+            <video id="localVideo" autoplay></video>
+            <audio id="localAudio" autoplay></audio>
+        </div> -->
+    <div id="remoteVideoContainer"></div>
+  </div>
+</div>
