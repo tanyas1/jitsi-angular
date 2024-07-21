@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/jitsi-angular",
+    "public": "dist/jitsi-angular-poc",
     "ignore": [
       "firebase.json",
       "**/.*",
