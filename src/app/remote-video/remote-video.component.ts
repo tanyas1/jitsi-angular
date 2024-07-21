@@ -121,7 +121,7 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
     const videoNameElement = document.createElement('div');
     videoNameElement.className = 'video-name';
     // videoNameElement.id = 'video-name' + this.videoElementId;
-    videoNameElement.innerHTML = 'Participant' + this.videoElementId + 2;
+    videoNameElement.innerHTML = 'Participant ' + (+this.videoElementId + 2);
     // name.innerHTML = video.getDisplayName();
     videoPersonElement!.appendChild(videoContentElement);
     videoPersonElement!.appendChild(videoNameElement);
