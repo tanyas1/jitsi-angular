@@ -173,6 +173,6 @@ export class JitsiService {
   leaveConference() {
     // this.connection.disconnect();
     this.room.leave();
-    this.room.leaveConference();
+    // this.room.leaveConference();
   }
 }

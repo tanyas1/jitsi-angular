@@ -13,7 +13,9 @@ export class AppComponent {
 
   constructor(private jitsiService: JitsiService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.jitsiService
+  }
 
   join() {
     if (this.username) {

@@ -30,6 +30,7 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
     }
     this.jitsiService.leaveConference();
     this.isLocalVideoSet = false;
+    location.reload();
   }
 
   closeVideo() {
@@ -62,8 +63,6 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
         return;
       }
 
-      console.warn('----------------TRACK--------------', track);
-
       // console.warn('------------------display name', track.getDisplayName());
       const participant = track.getParticipantId();
 
@@ -80,7 +79,6 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
 
     this.jitsiService.remoteVideoTracks.subscribe((tracks) => {
       this.remoteVideoTracks = tracks;
-      console.warn('ngoninit remote video track ----->>>', tracks);
       this.updateRemoteVideos();
     });
 
@@ -123,7 +121,7 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
     const videoNameElement = document.createElement('div');
     videoNameElement.className = 'video-name';
     // videoNameElement.id = 'video-name' + this.videoElementId;
-    videoNameElement.innerHTML = 'Tanya Sharma';
+    videoNameElement.innerHTML = 'Participant' + this.videoElementId + 2;
     // name.innerHTML = video.getDisplayName();
     videoPersonElement!.appendChild(videoContentElement);
     videoPersonElement!.appendChild(videoNameElement);
