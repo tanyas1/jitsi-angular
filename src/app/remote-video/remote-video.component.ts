@@ -18,6 +18,7 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
   localAudioTrack: any;
   isMuted = false;
   isVideoOff = false;
+  isLocalVideoSet = false;
 
   constructor(private jitsiService: JitsiService) {}
 
@@ -28,6 +29,7 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
       this.localVideoTrack.detach(document.getElementById('localVideo'));
     }
     this.jitsiService.leaveConference();
+    this.isLocalVideoSet = false;
   }
 
   closeVideo() {
@@ -87,6 +89,7 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
       this.localVideoTrack = track;
       if (track) {
         track.attach(document.getElementById('localVideo'));
+        this.isLocalVideoSet = true;
       }
     });
 

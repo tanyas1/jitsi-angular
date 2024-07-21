@@ -14,7 +14,7 @@
 
 <div id="remoteVideoContainer">
 
-  <div class="video-person">
+  <div class="video-person" [ngStyle]="{ 'display' : isLocalVideoSet ? 'block' : 'none' }">
     <!-- <div class="video-content"> -->
     <video id="localVideo" class="video-content" autoplay></video>
     <div class="video-name">Tanya Sharma</div>
