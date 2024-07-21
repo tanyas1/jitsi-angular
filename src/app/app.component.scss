@@ -1,0 +1,25 @@
+.join-conf {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  .call {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-color: #75fb4c;
+    button {
+      border-radius: 30px;
+      &:hover {
+        border-radius: 6px;
+      }
+    }
+    div {
+      color: #75fb4c;
+    }
+  }
+}

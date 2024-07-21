@@ -13,7 +13,46 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
   videoElementId = 0;
   remoteTracks: any = [];
   audioElementId: any = [];
+
+  localVideoTrack: any;
+  localAudioTrack: any;
+  isMuted = false;
+  isVideoOff = false;
+
   constructor(private jitsiService: JitsiService) {}
+
+
+  endConf() {
+    if (this.localVideoTrack) {
+      this.localVideoTrack.dispose();
+      this.localVideoTrack.detach(document.getElementById('localVideo'));
+    }
+    this.jitsiService.leaveConference();
+  }
+
+  closeVideo() {
+    this.localVideoTrack.mute();
+    this.isVideoOff = true;
+  }
+
+  resumeVideo() {
+    this.localVideoTrack.unmute();
+    this.isVideoOff = false;
+
+  }
+
+  mute() {
+    this.localAudioTrack.mute();
+    this.isMuted = true;
+  }
+
+  unmute() {
+    this.localAudioTrack.unmute();
+    this.isMuted = false;
+  }
+
+ 
+
 
   ngOnInit(): void {
     this.jitsiService.remoteTrackCalled.subscribe((track) => {
@@ -42,6 +81,18 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
       console.warn('ngoninit remote video track ----->>>', tracks);
       this.updateRemoteVideos();
     });
+
+
+    this.jitsiService.localVideoTrack.subscribe((track) => {
+      this.localVideoTrack = track;
+      if (track) {
+        track.attach(document.getElementById('localVideo'));
+      }
+    });
+
+    this.jitsiService.localAudioTrack.subscribe((audioTrack) => {
+      this.localAudioTrack = audioTrack;
+    });
   }
 
   addVideoElement(video: any) {
@@ -49,17 +100,34 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
     console.log('hello');
 
     const videoStream = video.stream;
-    const videoElement = document.createElement('video');
-    videoElement.srcObject = videoStream;
-    videoElement.autoplay = true;
-    videoElement.playsInline = true;
-    videoElement.className = 'video-element';
-    videoElement.id = 'video' + this.videoElementId;
+
+
+    const videoPersonElement = document.createElement('div');
+    videoPersonElement.className = 'video-person';
+    // videoPersonElement.id = 'video-person' + this.videoElementId;
+    document.getElementById('remoteVideoContainer')!.appendChild(videoPersonElement);
+
+
+
+    const videoContentElement = document.createElement('video');
+    videoContentElement.srcObject = videoStream;
+    videoContentElement.autoplay = true;
+    videoContentElement.playsInline = true;
+    videoContentElement.className = 'video-content';
+    // videoContentElement.id = 'video' + this.videoElementId;
+
+ 
+    const videoNameElement = document.createElement('div');
+    videoNameElement.className = 'video-name';
+    // videoNameElement.id = 'video-name' + this.videoElementId;
+    videoNameElement.innerHTML = 'Tanya Sharma';
+    // name.innerHTML = video.getDisplayName();
+    videoPersonElement!.appendChild(videoContentElement);
+    videoPersonElement!.appendChild(videoNameElement);
+
+
     this.videoElementId++;
 
-    const name = document.createElement('div');
-    // name.innerHTML = video.getDisplayName();
-    document.getElementById('remoteVideoContainer')!.appendChild(videoElement);
   }
 
   addAudioElement(audioStream: any) {
@@ -72,11 +140,14 @@ export class RemoteVideosComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.remoteVideoTracks.forEach((track) => {
-    //   track.detach(
-    //     document.getElementById(`remoteVideo-${track.getParticipantId()}`)
-    //   );
-    // });
+    if (this.localVideoTrack) {
+      this.localVideoTrack.detach(document.getElementById('localVideo'));
+    }
+    this.remoteVideoTracks.forEach((track) => {
+      track.detach(
+        document.getElementById(`remoteVideo-${track.getParticipantId()}`)
+      );
+    });
   }
 
   private updateRemoteVideos() {

@@ -1,8 +1,11 @@
 <!-- src/app/app.component.html -->
 
-<div>
-  <input [(ngModel)]="username" />
-  <button (click)="join()" [disabled]="!username">Join</button>
+<div class="join-conf">
+  <input [(ngModel)]="username" placeholder="Enter name here" />
+  <button class="call" (click)="join()">
+    <img src="assets/call-green.svg" />
+    <div>Join</div>
+  </button>
 </div>
 <app-local-video></app-local-video>
 <app-remote-video></app-remote-video>

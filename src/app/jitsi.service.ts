@@ -48,7 +48,13 @@ export class JitsiService {
       this.onConnectionDisconnected.bind(this)
     );
 
-    this.connection.connect();
+    const username = 'coditas@meet.jitsi';
+    const password = 'c0ditas'; 
+
+    this.connection.connect({
+      id: username,
+      password: password
+  });
   }
 
   private onConnectionSuccess() {

@@ -11,13 +11,33 @@
     <video class="video-box" [id]="'remoteAudio-' + track.getParticipantId()" autoplay></video>
   </div> -->
 
-<div id="videoPanel">
-  <div class="flex-container">
-    <!-- <div id="localVideoContainer" class="flex-child">
 
-            <video id="localVideo" autoplay></video>
-            <audio id="localAudio" autoplay></audio>
-        </div> -->
-    <div id="remoteVideoContainer"></div>
+<div id="remoteVideoContainer">
+
+  <div class="video-person">
+    <!-- <div class="video-content"> -->
+    <video id="localVideo" class="video-content" autoplay></video>
+    <div class="video-name">Tanya Sharma</div>
+
+    <!-- </div> -->
+
   </div>
+
+
+</div>
+
+
+
+<!-- <button>END CONFERENCE</button>
+<button (click)="mute()" [disabled]="isMuted">MUTE</button>
+<button (click)="unmute()" [disabled]="!isMuted">UNMUTE</button>
+<button (click)="closeVideo()">CLOSE VIDEO</button>
+<button (click)="resumeVideo()">RESUME VIDEO</button> -->
+
+
+
+<div class="video-call-actions ">
+  <button class="video-action-button mic" (click)="isMuted ? mute() : unmute()"></button>
+  <button class="video-action-button camera" (click)="isVideoOff ? mute() : unmute()"></button>
+  <button class="video-action-button endcall" (click)="endConf()">Leave</button>
 </div>
